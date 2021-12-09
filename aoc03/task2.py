@@ -3,12 +3,6 @@ def remove_indices(lst, indices):
         del lst[idx]
 
 
-binary_numbers = []
-with open('input.txt') as input_file:
-    for line in input_file:
-        binary_numbers.append(line.rstrip('\n'))
-
-
 def filter_list(lst, most_common):
     lst = lst[:]
     i = 0
@@ -32,6 +26,11 @@ def filter_list(lst, most_common):
 
     return lst
 
+
+binary_numbers = []
+with open('input.txt') as input_file:
+    for line in input_file:
+        binary_numbers.append(line.rstrip('\n'))
 
 oxygen = filter_list(binary_numbers, True)
 co2 = filter_list(binary_numbers, False)
