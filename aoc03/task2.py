@@ -27,12 +27,13 @@ def filter_list(lst, most_common):
     return lst
 
 
-binary_numbers = []
-with open('input.txt') as input_file:
-    for line in input_file:
-        binary_numbers.append(line.rstrip('\n'))
+if __name__ == '__main__':
+    binary_numbers = []
+    with open('input.txt') as input_file:
+        for line in input_file:
+            binary_numbers.append(line.rstrip('\n'))
 
-oxygen = filter_list(binary_numbers, True)
-co2 = filter_list(binary_numbers, False)
+    oxygen = filter_list(binary_numbers, True)
+    co2 = filter_list(binary_numbers, False)
 
-print(int(''.join(oxygen), 2) * int(''.join(co2), 2))
+    print(int(''.join(oxygen), 2) * int(''.join(co2), 2))

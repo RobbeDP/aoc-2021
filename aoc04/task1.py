@@ -45,11 +45,10 @@ def bingo_row(board):
 
 
 def bingo_col(board):
-    # Loop over all rows of the board
     for i in range(len(board[0])):
         bingo = True
         for j in range(len(board)):
-            if not board[i][j][1]:
+            if not board[j][i][1]:
                 bingo = False
                 break
 
@@ -59,30 +58,26 @@ def bingo_col(board):
     return False
 
 
-def get_board_score(board):
-    if bingo_row(board) or bingo_col(board):
-        score = 0
-        for row in board:
-            for number, marked in row:
-                if not marked:
-                    score += number
+def get_score(board):
+    score = 0
+    for row in board:
+        for number, marked in row:
+            if not marked:
+                score += number
 
-        return score
-
-    return -1
+    return score
 
 
 def get_total_score(numbers, boards):
     for number in numbers:
         for board in boards:
             mark(number, board)
-            score = get_board_score(board)
-            if score != -1:
-                return number * score
+            if bingo_row(board) or bingo_col(board):
+                return number * get_score(board)
 
     return -1
 
 
-n, b = read_input('input.txt')
-print(get_total_score(n, b))
-
+if __name__ == '__main__':
+    n, b = read_input('input.txt')
+    print(get_total_score(n, b))
