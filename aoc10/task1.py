@@ -6,14 +6,6 @@ def read_input(file_name):
         return list(map(lambda x: x.rstrip('\n'), input_file))
 
 
-error_scores = {
-    ')': 3,
-    ']': 57,
-    '}': 1197,
-    '>': 25137
-}
-
-
 def is_opening_bracket(char):
     return char in ['(', '[', '{', '<']
 
@@ -23,6 +15,14 @@ def brackets_correspond(opening_bracket, closing_bracket):
            (opening_bracket == '[' and closing_bracket == ']') or \
            (opening_bracket == '{' and closing_bracket == '}') or \
            (opening_bracket == '<' and closing_bracket == '>')
+
+
+error_scores = {
+    ')': 3,
+    ']': 57,
+    '}': 1197,
+    '>': 25137
+}
 
 
 def check_line(line):
