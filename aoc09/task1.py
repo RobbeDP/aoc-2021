@@ -7,29 +7,40 @@ def read_input(file_name):
         return height_map
 
 
-def add_positions(pos1, pos2):
-    return [pos1[0] + pos2[0], pos1[1] + pos2[1]]
+# Return all in bound neighbours of the given position.
+def get_neighbours(position, height_map):
+    neighbours = []
+    row, col = position
+
+    if row + 1 < len(height_map):
+        neighbours.append((row + 1, col))
+    if row - 1 >= 0:
+        neighbours.append((row - 1, col))
+    if col + 1 < len(height_map[0]):
+        neighbours.append((row, col + 1))
+    if col - 1 >= 0:
+        neighbours.append((row, col - 1))
+
+    return neighbours
 
 
 def get_risk(height_map):
-    offsets = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    risk = 0
 
-    risk_level = 0
     for i, row in enumerate(height_map):
-        for j, height_value in enumerate(row):
+        for j, height in enumerate(row):
             low_point = True
-            for offset in offsets:
-                neighbour_pos = add_positions([i, j], offset)
-                if 0 <= neighbour_pos[0] < len(height_map) and 0 <= neighbour_pos[1] < len(height_map[i]):
-                    neighbour_val = height_map[neighbour_pos[0]][neighbour_pos[1]]
-                    if neighbour_val <= height_value:
-                        low_point = False
-                        break
+            position = (i, j)
+
+            for n_row, n_col in get_neighbours(position, height_map):
+                if height_map[n_row][n_col] <= height:
+                    low_point = False
+                    break
 
             if low_point:
-                risk_level += 1 + height_value
+                risk += 1 + height
 
-    return risk_level
+    return risk
 
 
 if __name__ == '__main__':
