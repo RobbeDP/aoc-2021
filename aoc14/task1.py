@@ -21,7 +21,7 @@ def do_insertions(polymer_template, pair_insertions, steps):
     for _ in range(steps):
         for i in range(len(polymer_template) - 1):
             index = 2 * i
-            pair = f'{polymer_template[index]}{polymer_template[index + 1]}'
+            pair = ''.join(polymer_template[index:index + 2])
             to_insert = pair_insertions[pair]
             polymer_template.insert(index + 1, to_insert)
 
