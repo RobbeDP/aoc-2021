@@ -18,7 +18,7 @@ def is_small(node):
 
 def dfs(node, graph, seen, current_path, paths):
     if node == 'end':
-        paths.append(current_path)
+        paths.append(current_path[:])
         return
 
     if is_small(node):
@@ -38,7 +38,7 @@ def find_path_amount(graph):
     current_node = 'start'
     paths = []
 
-    dfs(current_node, graph, set(), [], paths)
+    dfs(current_node, graph, set(), [current_node], paths)
 
     return len(paths)
 
